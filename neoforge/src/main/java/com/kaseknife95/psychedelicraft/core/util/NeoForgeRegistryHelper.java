@@ -1,0 +1,45 @@
+package com.kaseknife95.psychedelicraft.core.util;
+
+import com.kaseknife95.psychedelicraft.Constants;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+public class NeoForgeRegistryHelper {
+
+    public static final DeferredRegister<Item> ITEMS =
+            DeferredRegister.create(BuiltInRegistries.ITEM, Constants.MOD_ID);
+
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(BuiltInRegistries.BLOCK, Constants.MOD_ID);
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
+            DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, Constants.MOD_ID);
+
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS =
+            DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, Constants.MOD_ID);
+
+    @SuppressWarnings("unchecked")
+    public static <T> DeferredRegister<T> deferredRegisterFor(Registry<T> objRegistry) {
+        if (objRegistry.key().location().equals(BuiltInRegistries.ITEM.key().location())) {
+            return (DeferredRegister<T>) ITEMS;
+        }
+
+        if (objRegistry.key().location().equals(BuiltInRegistries.BLOCK.key().location())) {
+            return (DeferredRegister<T>) BLOCKS;
+        }
+
+        if (objRegistry.key().location().equals(BuiltInRegistries.CREATIVE_MODE_TAB.key().location())) {
+            return (DeferredRegister<T>) CREATIVE_TABS;
+        }
+        if (objRegistry.key().location().equals(BuiltInRegistries.MOB_EFFECT.key().location())) {
+            return (DeferredRegister<T>) MOB_EFFECTS;
+        }
+        throw new IllegalArgumentException("No NeoForge registry linked for: " + objRegistry.key());
+    }
+}

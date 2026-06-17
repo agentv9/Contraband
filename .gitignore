@@ -1,0 +1,91 @@
+# =========================
+# Gradle
+# =========================
+.gradle/
+build/
+**/build/
+
+# Gradle cache
+**/.gradle/
+
+# =========================
+# IDE Files
+# =========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# NetBeans
+nbproject/
+
+# =========================
+# Minecraft Run Directories
+# =========================
+run/
+runs/
+run-data/
+**/run/
+**/runs/
+**/run-data/
+
+# =========================
+# Logs & Crashes
+# =========================
+logs/
+crash-reports/
+latest.log
+debug.log
+
+# =========================
+# Generated Resources
+# =========================
+src/generated/
+**/src/generated/
+
+# Fabric
+.remapped/
+
+# Loom
+.loom-cache/
+**/.loom-cache/
+
+# =========================
+# Java
+# =========================
+*.class
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Temporary Files
+# =========================
+*.tmp
+*.bak
+*.swp
+
+# =========================
+# Local Environment
+# =========================
+local.properties
+
+# =========================
+# Profiling
+# =========================
+*.jfr
