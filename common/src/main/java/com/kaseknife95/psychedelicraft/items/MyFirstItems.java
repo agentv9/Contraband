@@ -7,12 +7,12 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
-import static com.kaseknife95.psychedelicraft.Blocks.MyFirstBlocks.MY_FIRST_BLOCK;
+import static com.kaseknife95.psychedelicraft.Blocks.MyFirstBlocks.TEST_BLOCK;
 
 public class MyFirstItems {
 
-    public static final DeferredRegistryObject<Item> ICON_ITEM =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "icon_item",
+    public static final DeferredRegistryObject<Item> LOGO_ITEM =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "logo_item",
                     () -> new Item(new Item.Properties()));
 
     public static final DeferredRegistryObject<Item> SHROOM =
@@ -27,9 +27,9 @@ public class MyFirstItems {
                                     )
                     ));
 
-    public static final DeferredRegistryObject<Item> MY_FIRST_BLOCK_ITEM =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "my_first_block",
-                    () -> new BlockItem(MY_FIRST_BLOCK.get(), new Item.Properties()));
+    public static final DeferredRegistryObject<Item> TEST_BLOCK_ITEM =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "test_block",
+                    () -> new BlockItem(TEST_BLOCK.get(), new Item.Properties()));
 
     public static void loadClass() {}
 }

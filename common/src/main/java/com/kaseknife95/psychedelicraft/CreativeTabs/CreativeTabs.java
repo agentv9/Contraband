@@ -13,9 +13,9 @@ public class CreativeTabs {
             Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "psychedelicraft",
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("itemGroup.psychedelicraft.psychedelicraft"))
-                            .icon(() -> new ItemStack(MyFirstItems.ICON_ITEM.get()))
+                            .icon(() -> new ItemStack(MyFirstItems.LOGO_ITEM.get()))
                             .displayItems((parameters, output) -> {
-                                output.accept(MyFirstItems.MY_FIRST_BLOCK_ITEM.get());
+                                output.accept(MyFirstItems.TEST_BLOCK_ITEM.get());
                                 output.accept(MyFirstItems.SHROOM.get());
                             })
                             .build()
