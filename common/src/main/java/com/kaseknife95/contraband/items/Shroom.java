@@ -4,6 +4,7 @@ import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.drugs.DrugType;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
+import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 
 public class Shroom extends DrugBase {
 
@@ -16,8 +17,8 @@ public class Shroom extends DrugBase {
                         DrugType.HALLUCINOGEN,
                         1.0F,
                         1.0F,
-                        GeneticsData.defaultStrain("mushroom","Testing Color changing"),
-                        null
+                        GeneticsData.defaultStrain("mushroom"),
+                        SubstanceData.defaultVariant("Testing Color changing")
                 )
         );
     }
