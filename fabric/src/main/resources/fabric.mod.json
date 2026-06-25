@@ -16,7 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kaseknife95.psychedelicraft.Psychedelicraft"
+      "com.kaseknife95.contraband.Contraband"
+    ],
+    "client": [
+      "com.kaseknife95.contraband.client.FabricClient"
     ]
   },
   "mixins": [
