@@ -4,10 +4,7 @@ import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-
-//import static com.kaseknife95.contraband.Blocks.MyFirstBlocks.TEST_BLOCK;
 
 public class MyFirstItems {
 
@@ -24,12 +21,40 @@ public class MyFirstItems {
                                             .saturationModifier(0.2f)
                                             .alwaysEdible()
                                             .build()
-                                    )
+                                    ), "Golden Teacher"
                     ));
-    /*
-    public static final DeferredRegistryObject<Item> TEST_BLOCK_ITEM =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "test_block",
-                    () -> new BlockItem(TEST_BLOCK.get(), new Item.Properties()));
-    */
+    public static final DeferredRegistryObject<Item> SHROOM2 =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "shroom2",
+                    () -> new Shroom(
+                            new Item.Properties()
+                                    .food(new FoodProperties.Builder()
+                                            .nutrition(2)
+                                            .saturationModifier(0.2f)
+                                            .alwaysEdible()
+                                            .build()
+                                    ), "Blue Meanie"
+                    ));
+    public static final DeferredRegistryObject<Item> SHROOM3 =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "shroom3",
+                    () -> new Shroom(
+                            new Item.Properties()
+                                    .food(new FoodProperties.Builder()
+                                            .nutrition(2)
+                                            .saturationModifier(0.2f)
+                                            .alwaysEdible()
+                                            .build()
+                                    ), "Spore Crack"
+                    ));
+    public static final DeferredRegistryObject<Item> SHROOM4 =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "shroom4",
+                    () -> new Shroom(
+                            new Item.Properties()
+                                    .food(new FoodProperties.Builder()
+                                            .nutrition(2)
+                                            .saturationModifier(0.2f)
+                                            .alwaysEdible()
+                                            .build()
+                                    ), "Albino A+"
+                    ));
     public static void loadClass() {}
 }

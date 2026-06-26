@@ -2,8 +2,6 @@ package com.kaseknife95.contraband.client;
 
 import com.kaseknife95.contraband.Constants;
 import com.kaseknife95.contraband.core.base.drugs.DrugBase;
-import com.kaseknife95.contraband.items.MyFirstItems;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,15 +18,17 @@ public final class ForgeClientEvents {
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        event.register(
-                (ItemStack stack, int tintIndex) -> {
-                    if (stack.getItem() instanceof DrugBase drugItem) {
-                        return drugItem.getTintColor(stack, tintIndex);
-                    }
+        CommonColorItems.tintableItems().forEach(item ->
+                event.register(
+                        (stack, tintIndex) -> {
+                            if (stack.getItem() instanceof DrugBase drugItem) {
+                                return drugItem.getTintColor(stack, tintIndex);
+                            }
 
-                    return 0xFFFFFF;
-                },
-                MyFirstItems.SHROOM.get()
+                            return 0xFFFFFFFF;
+                        },
+                        item.get()
+                )
         );
     }
 }

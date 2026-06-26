@@ -9,14 +9,18 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 public class CreativeTabs {
-    public static final DeferredRegistryObject<CreativeModeTab> PSYCHEDELICRAFT_TAB =
+    public static final DeferredRegistryObject<CreativeModeTab> CONTRABAND_TAB =
             Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "contraband",
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("itemGroup.contraband.contraband"))
                             .icon(() -> new ItemStack(MyFirstItems.LOGO_ITEM.get()))
                             .displayItems((parameters, output) -> {
-                                //output.accept(MyFirstItems.TEST_BLOCK_ITEM.get());
+
                                 output.accept(MyFirstItems.SHROOM.get());
+                                output.accept(MyFirstItems.SHROOM2.get());
+                                output.accept(MyFirstItems.SHROOM3.get());
+                                output.accept(MyFirstItems.SHROOM4.get());
+
                             })
                             .build()
             );

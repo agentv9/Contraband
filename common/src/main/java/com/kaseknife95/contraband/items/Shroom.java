@@ -8,7 +8,7 @@ import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 
 public class Shroom extends DrugBase {
 
-    public Shroom(Properties properties) {
+    public Shroom(Properties properties, String variantName) {
         super(
                 properties,
                 new DrugData(
@@ -17,8 +17,8 @@ public class Shroom extends DrugBase {
                         DrugType.HALLUCINOGEN,
                         1.0F,
                         1.0F,
-                        GeneticsData.defaultStrain("mushroom"),
-                        SubstanceData.defaultVariant("Testing Color changing")
+                        GeneticsData.defaultGenetics("mushroom"),
+                        SubstanceData.defaultVariant(variantName)
                 )
         );
     }

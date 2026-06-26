@@ -12,7 +12,7 @@ public record GeneticsData(
         }
     }
 
-    public static GeneticsData defaultStrain(String speciesId) {
+    public static GeneticsData defaultGenetics(String speciesId) {
         return new GeneticsData(
                 speciesId,
                 1.0F,
