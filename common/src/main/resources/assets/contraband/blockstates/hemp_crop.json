@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": { "model": "contraband:block/hemp_crop_0" },
+    "age=1": { "model": "contraband:block/hemp_crop_1" },
+    "age=2": { "model": "contraband:block/hemp_crop_2" },
+    "age=3": { "model": "contraband:block/hemp_crop_3" },
+    "age=4": { "model": "contraband:block/hemp_crop_4" },
+    "age=5": { "model": "contraband:block/hemp_crop_5" },
+    "age=6": { "model": "contraband:block/hemp_crop_6" },
+    "age=7": { "model": "contraband:block/hemp_crop_7" }
+  }
+}

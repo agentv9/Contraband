@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "contraband:block/opium_plant_stage_4",
+    "particle": "contraband:block/opium_plant_stage_4"
+  },
+  "render_type": "cutout"
+}

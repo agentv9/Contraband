@@ -18,7 +18,7 @@ public final class ForgeClientEvents {
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
-        CommonColorItems.tintableItems().forEach(item ->
+        CommonColorRegistry.tintableItems().forEach(item ->
                 event.register(
                         (stack, tintIndex) -> {
                             if (stack.getItem() instanceof DrugBase drugItem) {

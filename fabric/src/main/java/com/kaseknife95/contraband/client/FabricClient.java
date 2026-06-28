@@ -8,7 +8,7 @@ public class FabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        CommonColorItems.tintableItems().forEach(item ->
+        CommonColorRegistry.tintableItems().forEach(item ->
                 ColorProviderRegistry.ITEM.register(
                         (stack, tintIndex) -> {
                             if (stack.getItem() instanceof DrugBase drugItem) {

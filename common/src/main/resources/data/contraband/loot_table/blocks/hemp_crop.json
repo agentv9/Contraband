@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "contraband:hemp_seed"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "contraband:hemp_crop",
+          "properties": {
+            "age": "7"
+          }
+        }
+      ],
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "contraband:hemp"
+        }
+      ]
+    }
+  ]
+}

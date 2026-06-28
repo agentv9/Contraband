@@ -1,7 +1,7 @@
 package com.kaseknife95.contraband.CreativeTabs;
 
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.items.MyFirstItems;
+import com.kaseknife95.contraband.items.Items;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -13,13 +13,21 @@ public class CreativeTabs {
             Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "contraband",
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("itemGroup.contraband.contraband"))
-                            .icon(() -> new ItemStack(MyFirstItems.LOGO_ITEM.get()))
+                            .icon(() -> new ItemStack(Items.LOGO_ITEM.get()))
                             .displayItems((parameters, output) -> {
 
-                                output.accept(MyFirstItems.SHROOM.get());
-                                output.accept(MyFirstItems.SHROOM2.get());
-                                output.accept(MyFirstItems.SHROOM3.get());
-                                output.accept(MyFirstItems.SHROOM4.get());
+                                output.accept(Items.SHROOM.get());
+                                output.accept(Items.COCAINE_LEAF.get());
+                                output.accept(Items.COCAINE_SEED.get());
+                                output.accept(Items.DRIED_COCAINE.get());
+                                output.accept(Items.DRIED_COCAINE_PACKAGE.get());
+                                output.accept(Items.DRIED_HEMP.get());
+                                output.accept(Items.DRIED_HEMP_PACKAGE.get());
+                                output.accept(Items.HEMP.get());
+                                output.accept(Items.HEMP_PACKAGE.get());
+                                output.accept(Items.HEMP_SEED.get());
+                                output.accept(Items.DRIED_OPIUM.get());
+                                output.accept(Items.OPIUM_BOTTLE.get());
 
                             })
                             .build()
