@@ -1,8 +1,10 @@
 package com.kaseknife95.contraband;
 
-import com.kaseknife95.contraband.Blocks.Blocks;
+import com.kaseknife95.contraband.Blocks.ModBlockEntities;
+import com.kaseknife95.contraband.Blocks.ModBlocks;
 import com.kaseknife95.contraband.CreativeTabs.CreativeTabs;
 import com.kaseknife95.contraband.Effects.Effects;
+import com.kaseknife95.contraband.core.data.ModDataComponents;
 import com.kaseknife95.contraband.items.Items;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,8 +24,10 @@ public class CommonClass {
 
         Effects.loadClass();
         Items.loadClass();
-        Blocks.loadClass();
+        ModBlocks.loadClass();
+        ModBlockEntities.loadClass();
         CreativeTabs.loadClass();
+        ModDataComponents.loadClass();
         // It is common for all supported loaders to provide a similar feature that can not be used directly in the
         // common code. A popular way to get around this is using Java's built-in service loader feature to create
         // your own abstraction layer. You can learn more about this in our provided services class. In this example

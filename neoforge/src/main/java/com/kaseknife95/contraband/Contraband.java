@@ -17,6 +17,8 @@ public class Contraband {
         NeoForgeRegistryHelper.MOB_EFFECTS.register(eventBus);
         NeoForgeRegistryHelper.ITEMS.register(eventBus);
         NeoForgeRegistryHelper.BLOCKS.register(eventBus);
+        NeoForgeRegistryHelper.BLOCK_ENTITY_TYPE.register(eventBus);
+        NeoForgeRegistryHelper.DATA_COMPONENT_TYPE.register(eventBus);
         NeoForgeRegistryHelper.CREATIVE_TABS.register(eventBus);
 
         Constants.LOG.info("Hello NeoForge world!");

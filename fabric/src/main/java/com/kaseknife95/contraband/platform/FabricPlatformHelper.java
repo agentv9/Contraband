@@ -4,10 +4,17 @@ import com.kaseknife95.contraband.Constants;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
 import com.kaseknife95.contraband.core.util.FabricDeferredRegistryObject;
 import com.kaseknife95.contraband.platform.services.IPlatformHelper;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class FabricPlatformHelper implements IPlatformHelper {
@@ -27,6 +34,16 @@ public class FabricPlatformHelper implements IPlatformHelper {
         );
 
         return new FabricDeferredRegistryObject<>(registeredObject);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(
+            BiFunction<BlockPos, BlockState, T> factory,
+            Block... validBlocks
+    ) {
+        return FabricBlockEntityTypeBuilder
+                .create(factory::apply, validBlocks)
+                .build();
     }
 
     @Override

@@ -20,7 +20,10 @@ public class Contraband {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ForgeRegistryHelper.MOB_EFFECTS.register(modEventBus);
         ForgeRegistryHelper.BLOCKS.register(modEventBus);
+        ForgeRegistryHelper.BLOCK_ENTITIES.register(modEventBus);
+        ForgeRegistryHelper.DATA_COMPONENTS.register(modEventBus);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.CREATIVE_TABS.register(modEventBus);
+
     }
 }

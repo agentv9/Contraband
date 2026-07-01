@@ -1,12 +1,13 @@
 package com.kaseknife95.contraband.items;
 
-import com.kaseknife95.contraband.Blocks.Blocks;
+import com.kaseknife95.contraband.Blocks.ModBlocks;
+import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
+import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
 
 public class Items {
 
@@ -61,9 +62,10 @@ public class Items {
 
     public static final DeferredRegistryObject<Item> HEMP_SEED =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "hemp_seed",
-                    () -> new ItemNameBlockItem(
-                            Blocks.HEMP_CROP.get(),
-                            new Item.Properties()
+                    () -> new PropagationBase(
+                            ModBlocks.HEMP_CROP.get(),
+                            new Item.Properties(),
+                            GeneticsData.defaultGenetics("hemp")
                     ));
     public static void loadClass() {}
 }
