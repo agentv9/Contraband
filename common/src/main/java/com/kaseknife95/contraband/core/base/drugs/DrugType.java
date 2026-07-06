@@ -1,5 +1,7 @@
 package com.kaseknife95.contraband.core.base.drugs;
 
+import com.mojang.serialization.Codec;
+
 public enum DrugType {
 
     STIMULANT(
@@ -34,6 +36,13 @@ public enum DrugType {
 
     private final String displayName;
     private final String description;
+
+
+    public static final Codec<DrugType> CODEC =
+            Codec.STRING.xmap(
+                    DrugType::valueOf,
+                    DrugType::name
+            );
 
     DrugType(String displayName, String description) {
         this.displayName = displayName;

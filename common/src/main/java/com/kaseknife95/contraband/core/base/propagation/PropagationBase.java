@@ -1,5 +1,6 @@
 package com.kaseknife95.contraband.core.base.propagation;
 
+import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.growables.GrowableBE;
 import com.kaseknife95.contraband.core.data.ModDataComponents;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -24,26 +26,56 @@ public class PropagationBase extends ItemNameBlockItem {
 
     public PropagationBase(Block block, Properties properties, GeneticsData defaultGenetics) {
         super(block, properties);
+
+        if (defaultGenetics == null) {
+            throw new IllegalArgumentException("defaultGenetics cannot be null");
+        }
+
         this.defaultGenetics = defaultGenetics;
+    }
+
+    public GeneticsData defaultGenetics() {
+        return this.defaultGenetics;
+    }
+
+    public GeneticsData geneticsData(ItemStack stack) {
+        GeneticsData stackGenetics = stack.get(ModDataComponents.GENETICS.get());
+        return stackGenetics != null ? stackGenetics : this.defaultGenetics;
+    }
+
+    public void setGenetics(ItemStack stack, GeneticsData genetics) {
+        if (genetics == null) {
+            stack.remove(ModDataComponents.GENETICS.get());
+            return;
+        }
+
+        stack.set(ModDataComponents.GENETICS.get(), genetics);
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
         InteractionResult result = super.useOn(context);
 
-        if (result.consumesAction() && !context.getLevel().isClientSide()) {
-            Level level = context.getLevel();
+        if (!result.consumesAction() || context.getLevel().isClientSide()) {
+            return result;
+        }
 
-            BlockPos cropPos = findPlacedCropPos(context);
+        Level level = context.getLevel();
+        BlockPos cropPos = findPlacedCropPos(context);
 
-            if (cropPos != null) {
-                BlockEntity blockEntity = level.getBlockEntity(cropPos);
+        if (cropPos == null) {
+            return result;
+        }
 
-                if (blockEntity instanceof GrowableBE growableBE) {
-                    GeneticsData genetics = getGeneticsFromSeed(context.getItemInHand());
-                    growableBE.setGeneticsData(genetics);
-                }
-            }
+        BlockEntity blockEntity = level.getBlockEntity(cropPos);
+
+        if (blockEntity instanceof GrowableBE growableBE) {
+            growableBE.setGeneticsData(geneticsData(context.getItemInHand()));
+
+            BlockState state = level.getBlockState(cropPos);
+
+            level.sendBlockUpdated(cropPos, state, state, Block.UPDATE_ALL);
+            level.updateNeighborsAt(cropPos, state.getBlock());
         }
 
         return result;
@@ -67,17 +99,11 @@ public class PropagationBase extends ItemNameBlockItem {
     }
 
     public void setGeneticsOnSeed(ItemStack stack, GeneticsData genetics) {
-        stack.set(ModDataComponents.GENETICS.get(), genetics);
+        setGenetics(stack, genetics);
     }
 
     public GeneticsData getGeneticsFromSeed(ItemStack stack) {
-        GeneticsData genetics = stack.get(ModDataComponents.GENETICS.get());
-
-        if (genetics != null) {
-            return genetics;
-        }
-
-        return this.defaultGenetics;
+        return geneticsData(stack);
     }
 
     public GeneticsData mutateGeneticsForTesting(GeneticsData input, RandomSource random) {
@@ -87,14 +113,14 @@ public class PropagationBase extends ItemNameBlockItem {
 
         return new GeneticsData(
                 input.speciesId(),
+                input.strainId(),
+                input.strainName(),
                 clamp(input.yieldModifier() + yieldChange, 0.1F, 5.0F),
                 clamp(input.stability() + stabilityChange, 0.1F, 5.0F),
-                clamp(input.geneticQuality() + qualityChange, 0.1F, 5.0F)
+                clamp(input.geneticQuality() + qualityChange, 0.1F, 5.0F),
+                input.primaryColor(),
+                input.secondaryColor()
         );
-    }
-
-    private static float clamp(float value, float min, float max) {
-        return Math.max(min, Math.min(max, value));
     }
 
     @Override
@@ -106,7 +132,7 @@ public class PropagationBase extends ItemNameBlockItem {
     ) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        GeneticsData genetics = getGeneticsFromSeed(stack);
+        GeneticsData genetics = geneticsData(stack);
 
         tooltip.add(Component.empty());
 
@@ -118,19 +144,66 @@ public class PropagationBase extends ItemNameBlockItem {
                 .append(Component.literal(genetics.speciesId())
                         .withStyle(ChatFormatting.WHITE)));
 
+        tooltip.add(Component.literal("Strain: ")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(genetics.strainName())
+                        .withStyle(ChatFormatting.GOLD)));
+
+        tooltip.add(Component.literal("Strain ID: ")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(genetics.strainId())
+                        .withStyle(ChatFormatting.DARK_GRAY)));
+
         tooltip.add(Component.literal("Yield: ")
                 .withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(String.format("%.2fx", genetics.yieldModifier()))
+                .append(Component.literal(formatMultiplier(genetics.yieldModifier()))
                         .withStyle(ChatFormatting.GOLD)));
 
         tooltip.add(Component.literal("Stability: ")
                 .withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(String.format("%.2f", genetics.stability()))
+                .append(Component.literal(formatMultiplier(genetics.stability()))
                         .withStyle(ChatFormatting.AQUA)));
 
         tooltip.add(Component.literal("Genetic Quality: ")
                 .withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(String.format("%.2f", genetics.geneticQuality()))
+                .append(Component.literal(formatMultiplier(genetics.geneticQuality()))
                         .withStyle(ChatFormatting.LIGHT_PURPLE)));
+
+        tooltip.add(Component.literal("Primary Color: ")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal("#" + formatColor(genetics.primaryColor()))
+                        .withStyle(ChatFormatting.WHITE)));
+
+        tooltip.add(Component.literal("Secondary Color: ")
+                .withStyle(ChatFormatting.GRAY)
+                .append(Component.literal("#" + formatColor(genetics.secondaryColor()))
+                        .withStyle(ChatFormatting.WHITE)));
+    }
+
+    public int getTintColor(ItemStack stack, int tintIndex) {
+
+        GeneticsData genetics = geneticsData(stack);
+
+        if (genetics == null) {
+            return tintIndex == 0 ? 0xFFFFFFFF : 0xFFFFFFFF;
+        }
+
+        return switch (tintIndex) {
+            case 1 -> 0xFF000000 | genetics.primaryColor();
+            case 2 -> 0xFF000000 | genetics.secondaryColor();
+            default -> 0xFFFFFFFF;
+        };
+    }
+
+    private static float clamp(float value, float min, float max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    private static String formatMultiplier(float value) {
+        return String.format("%.2fx", value);
+    }
+
+    private static String formatColor(int color) {
+        return String.format("%06X", color & 0xFFFFFF);
     }
 }

@@ -11,12 +11,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
 
-    public static final DeferredRegistryObject<Block> HEMP_CROP =
-            Services.PLATFORM.register(BuiltInRegistries.BLOCK, "hemp_crop",
+    public static final DeferredRegistryObject<Block> CANNABIS_CROP =
+            Services.PLATFORM.register(BuiltInRegistries.BLOCK, "cannabis_crop",
                     () -> new GrowableBase(
                             BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHEAT),
                             7,
-                            () -> Items.HEMP_SEED.get()
+                            () -> Items.CANNABIS_SEED.get()
                     ));
 
     public static void loadClass() {}

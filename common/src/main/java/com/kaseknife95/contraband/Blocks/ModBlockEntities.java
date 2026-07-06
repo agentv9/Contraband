@@ -13,7 +13,7 @@ public class ModBlockEntities {
                     "growable",
                     () -> Services.PLATFORM.createBlockEntityType(
                             GrowableBE::new,
-                            ModBlocks.HEMP_CROP.get()
+                            ModBlocks.CANNABIS_CROP.get()
                     )
             );
     public static void loadClass() {}

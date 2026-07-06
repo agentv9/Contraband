@@ -5,6 +5,7 @@ import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -61,6 +62,35 @@ public class GrowableBase extends CropBlock implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new GrowableBE(pos, state);
+    }
+
+    public static int getTintColor(
+            BlockState state,
+            BlockAndTintGetter level,
+            BlockPos pos,
+            int tintIndex
+    ) {
+        if (level == null || pos == null) {
+            return 0xFFFFFF;
+        }
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (!(blockEntity instanceof GrowableBE growableBE)) {
+            return 0xFFFFFF;
+        }
+
+        GeneticsData genetics = growableBE.getGeneticsData();
+
+        if (genetics == null) {
+            return 0xFFFFFF;
+        }
+
+        return switch (tintIndex) {
+            case 1 -> genetics.primaryColor();
+            case 2 -> genetics.secondaryColor();
+            default -> 0xFFFFFF;
+        };
     }
 
     @Override

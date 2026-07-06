@@ -25,7 +25,7 @@ public class CreativeTabs {
                                 output.accept(Items.DRIED_HEMP_PACKAGE.get());
                                 output.accept(Items.HEMP.get());
                                 output.accept(Items.HEMP_PACKAGE.get());
-                                output.accept(Items.HEMP_SEED.get());
+                                output.accept(Items.CANNABIS_SEED.get());
                                 output.accept(Items.DRIED_OPIUM.get());
                                 output.accept(Items.OPIUM_BOTTLE.get());
 

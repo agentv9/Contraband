@@ -6,7 +6,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "contraband:hemp_seed"
+          "name": "contraband:cannabis_seed"
+
         }
       ]
     },
@@ -14,7 +15,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "contraband:hemp_crop",
+          "block": "contraband:cannabis_crop",
           "properties": {
             "age": "7"
           }
@@ -24,7 +25,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "contraband:hemp"
+          "name": "contraband:cannabis"
         }
       ]
     }

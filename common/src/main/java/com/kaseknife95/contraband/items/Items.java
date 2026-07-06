@@ -4,6 +4,7 @@ import com.kaseknife95.contraband.Blocks.ModBlocks;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
+import com.kaseknife95.contraband.items.drugs.Shroom;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
@@ -29,16 +30,16 @@ public class Items {
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cocaine_package",
                     () -> new Item(new Item.Properties()));
     public static final DeferredRegistryObject<Item> DRIED_HEMP =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_hemp",
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis",
                     () -> new Item(new Item.Properties()));
     public static final DeferredRegistryObject<Item> DRIED_HEMP_PACKAGE =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_hemp_package",
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis_package",
                     () -> new Item(new Item.Properties()));
     public static final DeferredRegistryObject<Item> HEMP =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "hemp",
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis",
                     () -> new Item(new Item.Properties()));
     public static final DeferredRegistryObject<Item> HEMP_PACKAGE =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "hemp_package",
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_package",
                     () -> new Item(new Item.Properties()));
 
     public static final DeferredRegistryObject<Item> DRIED_OPIUM =
@@ -60,12 +61,12 @@ public class Items {
                                     ), "Golden Teacher"
                     ));
 
-    public static final DeferredRegistryObject<Item> HEMP_SEED =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "hemp_seed",
+    public static final DeferredRegistryObject<Item> CANNABIS_SEED =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_seed",
                     () -> new PropagationBase(
-                            ModBlocks.HEMP_CROP.get(),
+                            ModBlocks.CANNABIS_CROP.get(),
                             new Item.Properties(),
-                            GeneticsData.defaultGenetics("hemp")
+                            GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32)
                     ));
     public static void loadClass() {}
 }

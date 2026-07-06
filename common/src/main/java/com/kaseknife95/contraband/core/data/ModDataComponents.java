@@ -1,6 +1,8 @@
 package com.kaseknife95.contraband.core.data;
 
+import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
+import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.component.DataComponentType;
@@ -14,6 +16,24 @@ public class ModDataComponents {
                     "genetics",
                     () -> DataComponentType.<GeneticsData>builder()
                             .persistent(GeneticsData.CODEC)
+                            .build()
+            );
+
+    public static final DeferredRegistryObject<DataComponentType<DrugData>> DRUG_DATA =
+            Services.PLATFORM.register(
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    "drug_data",
+                    () -> DataComponentType.<DrugData>builder()
+                            .persistent(DrugData.CODEC)
+                            .build()
+            );
+
+    public static final DeferredRegistryObject<DataComponentType<SubstanceData>> SUBSTANCE_DATA =
+            Services.PLATFORM.register(
+                    BuiltInRegistries.DATA_COMPONENT_TYPE,
+                    "substance_data",
+                    () -> DataComponentType.<SubstanceData>builder()
+                            .persistent(SubstanceData.CODEC)
                             .build()
             );
 

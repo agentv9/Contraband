@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "contraband:item/shroom1",
-    "layer1": "contraband:item/shroom2"
-  }
-}

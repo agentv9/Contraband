@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "contraband:item/dried_hemp_package"
+        "layer0": "contraband:item/dried_cannabis_package"
      },
      
     "display": {

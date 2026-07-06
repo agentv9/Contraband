@@ -1,7 +1,9 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "contraband:item/seed_hemp"
+        "layer0": "contraband:item/cannabis_seed_base",
+        "layer1": "contraband:item/cannabis_seed_primary",
+        "layer2": "contraband:item/cannabis_seed_secondary"
      },
      
     "display": {
