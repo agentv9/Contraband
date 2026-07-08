@@ -1,7 +1,11 @@
 package com.kaseknife95.contraband.core.base.growables;
 
+import com.kaseknife95.contraband.core.base.drugs.DrugBase;
+import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
+import com.kaseknife95.contraband.core.data.ModDataComponents;
+import com.kaseknife95.contraband.core.util.ColorUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -109,15 +113,26 @@ public class GrowableBase extends CropBlock implements EntityBlock {
             return drops;
         }
 
-        ServerLevel level = params.getLevel();
-
         for (ItemStack stack : drops) {
             if (stack.getItem() instanceof PropagationBase propagation) {
-                GeneticsData childGenetics =
-                        propagation.mutateGeneticsForTesting(parentGenetics, level.random);
-
-                propagation.setGeneticsOnSeed(stack, childGenetics);
+                propagation.setGeneticsOnSeed(stack, parentGenetics);
                 stack.setCount(2);
+            }
+
+            if (stack.getItem() instanceof DrugBase drugItem) {
+                DrugData baseData = drugItem.baseDrugData();
+
+                DrugData harvestedData = new DrugData(
+                        baseData.drugId(),
+                        baseData.displayName(),
+                        baseData.drugType(),
+                        baseData.basePotency(),
+                        baseData.baseQuality(),
+                        parentGenetics,
+                        baseData.substanceData()
+                );
+
+                stack.set(ModDataComponents.DRUG_DATA.get(), harvestedData);
             }
         }
 

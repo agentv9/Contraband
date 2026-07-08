@@ -16,7 +16,8 @@ public final class CommonColorRegistry {
     public static List<Supplier<Item>> tintableItems() {
         return List.of(
                 Items.SHROOM::get,
-                Items.CANNABIS_SEED::get
+                Items.CANNABIS_SEED::get,
+                Items.HEMP::get
         );
     }
 

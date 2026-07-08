@@ -1,8 +1,12 @@
 package com.kaseknife95.contraband.items;
 
 import com.kaseknife95.contraband.Blocks.ModBlocks;
+import com.kaseknife95.contraband.core.base.drugs.DrugData;
+import com.kaseknife95.contraband.core.base.drugs.DrugType;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
+import com.kaseknife95.contraband.core.base.products.RawProductBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
+import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
 import com.kaseknife95.contraband.items.drugs.Shroom;
 import com.kaseknife95.contraband.platform.Services;
@@ -35,9 +39,7 @@ public class Items {
     public static final DeferredRegistryObject<Item> DRIED_HEMP_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis_package",
                     () -> new Item(new Item.Properties()));
-    public static final DeferredRegistryObject<Item> HEMP =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis",
-                    () -> new Item(new Item.Properties()));
+
     public static final DeferredRegistryObject<Item> HEMP_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_package",
                     () -> new Item(new Item.Properties()));
@@ -49,6 +51,21 @@ public class Items {
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "opium_bottle",
                     () -> new Item(new Item.Properties()));
     //Drugs
+
+    public static final DeferredRegistryObject<Item> HEMP =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_leaf",
+                    () -> new RawProductBase(new Item.Properties(), new DrugData(
+                            "cannabis",
+                            "Cannabis Leaf",
+                            DrugType.CANNABINOID,
+                            1.0F,
+                            1.0F,
+                            GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32),
+                            SubstanceData.defaultVariant("OG Kush", 0x6B3FA0, 0x2E7D32)
+                    )));
+
+
+
     public static final DeferredRegistryObject<Item> SHROOM =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "shroom",
                     () -> new Shroom(

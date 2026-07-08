@@ -25,7 +25,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "contraband:cannabis"
+          "name": "contraband:cannabis_leaf"
         }
       ]
     }

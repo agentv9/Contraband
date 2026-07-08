@@ -1,7 +1,9 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "contraband:item/cannabis_leaf"
+        "layer0": "contraband:item/cannabis/cannabis_leaf_base",
+        "layer1": "contraband:item/cannabis/cannabis_leaf_primary",
+        "layer2": "contraband:item/cannabis/cannabis_leaf_secondary"
      },
      
     "display": {
