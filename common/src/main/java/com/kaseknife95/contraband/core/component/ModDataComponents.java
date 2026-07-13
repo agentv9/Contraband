@@ -1,4 +1,4 @@
-package com.kaseknife95.contraband.core.data;
+package com.kaseknife95.contraband.core.component;
 
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;

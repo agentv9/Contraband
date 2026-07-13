@@ -4,10 +4,8 @@ import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
-import com.kaseknife95.contraband.core.data.ModDataComponents;
-import com.kaseknife95.contraband.core.util.ColorUtils;
+import com.kaseknife95.contraband.core.component.ModDataComponents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
@@ -24,23 +22,41 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class GrowableBase extends CropBlock implements EntityBlock {
 
+    public static final IntegerProperty CROP_AGE =
+            BlockStateProperties.AGE_7;
 
-    private final int maxAge;
+    private final GrowableData growableData;
     private final Supplier<? extends ItemLike> seedItem;
-    public static final IntegerProperty CROP_AGE = BlockStateProperties.AGE_7;
 
     public GrowableBase(
             BlockBehaviour.Properties properties,
-            int maxAge,
+            GrowableData growableData,
             Supplier<? extends ItemLike> seedItem
     ) {
         super(properties);
-        this.maxAge = maxAge;
-        this.seedItem = seedItem;
+
+        this.growableData = Objects.requireNonNull(
+                growableData,
+                "growableData cannot be null"
+        );
+
+        this.seedItem = Objects.requireNonNull(
+                seedItem,
+                "seedItem cannot be null"
+        );
+
+        this.registerDefaultState(
+                this.stateDefinition.any().setValue(CROP_AGE, 0)
+        );
+    }
+
+    public GrowableData growableData() {
+        return this.growableData;
     }
 
     @Override
@@ -50,7 +66,7 @@ public class GrowableBase extends CropBlock implements EntityBlock {
 
     @Override
     public int getMaxAge() {
-        return this.maxAge;
+        return this.growableData.maxAge();
     }
 
     @Override
@@ -59,7 +75,9 @@ public class GrowableBase extends CropBlock implements EntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(
+            StateDefinition.Builder<Block, BlockState> builder
+    ) {
         builder.add(CROP_AGE);
     }
 
@@ -98,44 +116,66 @@ public class GrowableBase extends CropBlock implements EntityBlock {
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    public List<ItemStack> getDrops(
+            BlockState state,
+            LootParams.Builder params
+    ) {
         List<ItemStack> drops = super.getDrops(state, params);
 
-        BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        BlockEntity blockEntity =
+                params.getOptionalParameter(
+                        LootContextParams.BLOCK_ENTITY
+                );
 
         if (!(blockEntity instanceof GrowableBE growableBE)) {
             return drops;
         }
 
-        GeneticsData parentGenetics = growableBE.getGeneticsData();
+        GeneticsData parentGenetics =
+                growableBE.getGeneticsData();
 
         if (parentGenetics == null) {
             return drops;
         }
 
         for (ItemStack stack : drops) {
-            if (stack.getItem() instanceof PropagationBase propagation) {
-                propagation.setGeneticsOnSeed(stack, parentGenetics);
-                stack.setCount(2);
-            }
-
-            if (stack.getItem() instanceof DrugBase drugItem) {
-                DrugData baseData = drugItem.baseDrugData();
-
-                DrugData harvestedData = new DrugData(
-                        baseData.drugId(),
-                        baseData.displayName(),
-                        baseData.drugType(),
-                        baseData.basePotency(),
-                        baseData.baseQuality(),
-                        parentGenetics,
-                        baseData.substanceData()
-                );
-
-                stack.set(ModDataComponents.DRUG_DATA.get(), harvestedData);
-            }
+            applyGeneticsToDrop(stack, parentGenetics);
         }
 
         return drops;
+    }
+
+    private void applyGeneticsToDrop(
+            ItemStack stack,
+            GeneticsData parentGenetics
+    ) {
+        if (stack.getItem() instanceof PropagationBase propagation) {
+            propagation.setGeneticsOnSeed(
+                    stack,
+                    parentGenetics
+            );
+
+            stack.setCount(2);
+            return;
+        }
+
+        if (stack.getItem() instanceof DrugBase drugItem) {
+            DrugData baseData = drugItem.baseDrugData();
+
+            DrugData harvestedData = new DrugData(
+                    baseData.drugId(),
+                    baseData.displayName(),
+                    baseData.drugType(),
+                    baseData.basePotency(),
+                    baseData.baseQuality(),
+                    parentGenetics,
+                    baseData.substanceData()
+            );
+
+            stack.set(
+                    ModDataComponents.DRUG_DATA.get(),
+                    harvestedData
+            );
+        }
     }
 }

@@ -1,11 +1,11 @@
 package com.kaseknife95.contraband;
 
-import com.kaseknife95.contraband.Blocks.ModBlockEntities;
-import com.kaseknife95.contraband.Blocks.ModBlocks;
-import com.kaseknife95.contraband.CreativeTabs.CreativeTabs;
-import com.kaseknife95.contraband.Effects.Effects;
-import com.kaseknife95.contraband.core.data.ModDataComponents;
-import com.kaseknife95.contraband.items.Items;
+import com.kaseknife95.contraband.block.ModBlockEntities;
+import com.kaseknife95.contraband.block.ModBlocks;
+import com.kaseknife95.contraband.tab.CreativeTabs;
+import com.kaseknife95.contraband.effect.Effects;
+import com.kaseknife95.contraband.core.component.ModDataComponents;
+import com.kaseknife95.contraband.item.Items;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 

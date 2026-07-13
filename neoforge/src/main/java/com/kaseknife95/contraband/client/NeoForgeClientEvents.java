@@ -1,6 +1,9 @@
 package com.kaseknife95.contraband.client;
 
 import com.kaseknife95.contraband.Constants;
+import com.kaseknife95.contraband.block.ModBlockEntities;
+import com.kaseknife95.contraband.client.cropsticks.CropModels;
+import com.kaseknife95.contraband.client.cropsticks.CropStickBER;
 import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.growables.GrowableBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
@@ -9,6 +12,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 @EventBusSubscriber(
@@ -62,6 +66,18 @@ public final class NeoForgeClientEvents {
                         );
                     }
                 })
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(
+            EntityRenderersEvent.RegisterRenderers event
+    ) {
+        CropModels.loadClass();
+
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.CROP_STICK.get(),
+                CropStickBER::new
         );
     }
 }

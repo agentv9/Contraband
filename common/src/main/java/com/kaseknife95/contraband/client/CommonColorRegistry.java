@@ -1,8 +1,8 @@
 package com.kaseknife95.contraband.client;
 
-import com.kaseknife95.contraband.Blocks.ModBlocks;
+import com.kaseknife95.contraband.block.ModBlocks;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.items.Items;
+import com.kaseknife95.contraband.item.Items;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -17,7 +17,7 @@ public final class CommonColorRegistry {
         return List.of(
                 Items.SHROOM::get,
                 Items.CANNABIS_SEED::get,
-                Items.HEMP::get
+                Items.CANNABIS_LEAF::get
         );
     }
 

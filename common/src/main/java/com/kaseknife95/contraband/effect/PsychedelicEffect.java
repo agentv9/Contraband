@@ -1,4 +1,4 @@
-package com.kaseknife95.contraband.Effects;
+package com.kaseknife95.contraband.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

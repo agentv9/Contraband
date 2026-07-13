@@ -1,7 +1,7 @@
-package com.kaseknife95.contraband.CreativeTabs;
+package com.kaseknife95.contraband.tab;
 
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.items.Items;
+import com.kaseknife95.contraband.item.Items;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -23,7 +23,7 @@ public class CreativeTabs {
                                 output.accept(Items.DRIED_COCAINE_PACKAGE.get());
                                 output.accept(Items.DRIED_HEMP.get());
                                 output.accept(Items.DRIED_HEMP_PACKAGE.get());
-                                output.accept(Items.HEMP.get());
+                                output.accept(Items.CANNABIS_LEAF.get());
                                 output.accept(Items.HEMP_PACKAGE.get());
                                 output.accept(Items.CANNABIS_SEED.get());
                                 output.accept(Items.DRIED_OPIUM.get());

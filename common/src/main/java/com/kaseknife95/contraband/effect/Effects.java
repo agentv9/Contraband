@@ -1,4 +1,4 @@
-package com.kaseknife95.contraband.Effects;
+package com.kaseknife95.contraband.effect;
 
 
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;

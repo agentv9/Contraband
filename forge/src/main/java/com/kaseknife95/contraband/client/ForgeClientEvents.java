@@ -1,12 +1,17 @@
 package com.kaseknife95.contraband.client;
 
 import com.kaseknife95.contraband.Constants;
+import com.kaseknife95.contraband.block.ModBlockEntities;
 import com.kaseknife95.contraband.client.ClientRenderRefresh;
+import com.kaseknife95.contraband.client.cropsticks.CropModelRegistry;
+import com.kaseknife95.contraband.client.cropsticks.CropModels;
+import com.kaseknife95.contraband.client.cropsticks.CropStickBER;
 import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.growables.GrowableBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -64,6 +69,18 @@ public final class ForgeClientEvents {
                         );
                     }
                 })
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(
+            EntityRenderersEvent.RegisterRenderers event
+    ) {
+        CropModels.loadClass();
+
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.CROP_STICK.get(),
+                CropStickBER::new
         );
     }
 }

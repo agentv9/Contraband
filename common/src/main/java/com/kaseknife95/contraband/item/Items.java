@@ -1,6 +1,6 @@
-package com.kaseknife95.contraband.items;
+package com.kaseknife95.contraband.item;
 
-import com.kaseknife95.contraband.Blocks.ModBlocks;
+import com.kaseknife95.contraband.block.ModBlocks;
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.drugs.DrugType;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
@@ -8,7 +8,7 @@ import com.kaseknife95.contraband.core.base.products.RawProductBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.items.drugs.Shroom;
+import com.kaseknife95.contraband.item.drugs.Shroom;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
@@ -52,7 +52,7 @@ public class Items {
                     () -> new Item(new Item.Properties()));
     //Drugs
 
-    public static final DeferredRegistryObject<Item> HEMP =
+    public static final DeferredRegistryObject<Item> CANNABIS_LEAF =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_leaf",
                     () -> new RawProductBase(new Item.Properties(), new DrugData(
                             "cannabis",

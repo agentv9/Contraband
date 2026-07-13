@@ -2,7 +2,7 @@ package com.kaseknife95.contraband.core.base.drugs;
 
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.substances.SubstanceData;
-import com.kaseknife95.contraband.core.data.ModDataComponents;
+import com.kaseknife95.contraband.core.component.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

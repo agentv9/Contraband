@@ -1,11 +1,15 @@
 package com.kaseknife95.contraband.client;
 
+import com.kaseknife95.contraband.block.ModBlockEntities;
+import com.kaseknife95.contraband.client.cropsticks.CropModels;
+import com.kaseknife95.contraband.client.cropsticks.CropStickBER;
 import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.growables.GrowableBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 public class FabricClient implements ClientModInitializer {
 
@@ -43,5 +47,14 @@ public class FabricClient implements ClientModInitializer {
                         GrowableBase::getTintColor,
                         block.get()
                 ));
+
+        CropModels.loadClass();
+
+        BlockEntityRenderers.register(
+                ModBlockEntities.CROP_STICK.get(),
+                CropStickBER::new
+        );
     }
+
+
 }

@@ -1,9 +1,8 @@
 package com.kaseknife95.contraband.core.base.propagation;
 
-import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.growables.GrowableBE;
-import com.kaseknife95.contraband.core.data.ModDataComponents;
+import com.kaseknife95.contraband.core.component.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
