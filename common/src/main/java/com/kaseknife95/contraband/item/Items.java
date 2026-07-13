@@ -12,6 +12,7 @@ import com.kaseknife95.contraband.item.drugs.Shroom;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 public class Items {
@@ -19,6 +20,17 @@ public class Items {
     public static final DeferredRegistryObject<Item> LOGO_ITEM =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "logo_item",
                     () -> new Item(new Item.Properties()));
+
+    //crop breeding
+    public static final DeferredRegistryObject<Item> CROP_STICKS =
+            Services.PLATFORM.register(
+                    BuiltInRegistries.ITEM,
+                    "crop_sticks",
+                    () -> new BlockItem(
+                            ModBlocks.CROP_STICKS.get(),
+                            new Item.Properties()
+                    )
+            );
 
     //Growing stuff
     public static final DeferredRegistryObject<Item> COCAINE_LEAF =

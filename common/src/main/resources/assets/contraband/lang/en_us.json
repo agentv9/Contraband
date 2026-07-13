@@ -1,5 +1,6 @@
 {
   "item.contraband.psilocybin_mushroom": "Psilocybin Mushroom",
   "item.contraband.cannabis_seed": "Cannabis Seed",
-  "itemGroup.contraband.contraband": "Contraband"
+  "itemGroup.contraband.contraband": "Contraband",
+  "itemGroup.contraband.contraband_seeds": "Contraband - Seeds"
 }

@@ -105,22 +105,7 @@ public class PropagationBase extends ItemNameBlockItem {
         return geneticsData(stack);
     }
 
-    public GeneticsData mutateGeneticsForTesting(GeneticsData input, RandomSource random) {
-        float yieldChange = random.nextFloat() * 0.10F - 0.05F;
-        float stabilityChange = random.nextFloat() * 0.10F - 0.05F;
-        float qualityChange = random.nextFloat() * 0.10F - 0.05F;
 
-        return new GeneticsData(
-                input.speciesId(),
-                input.strainId(),
-                input.strainName(),
-                clamp(input.yieldModifier() + yieldChange, 0.1F, 5.0F),
-                clamp(input.stability() + stabilityChange, 0.1F, 5.0F),
-                clamp(input.geneticQuality() + qualityChange, 0.1F, 5.0F),
-                input.primaryColor(),
-                input.secondaryColor()
-        );
-    }
 
     @Override
     public void appendHoverText(
@@ -179,6 +164,15 @@ public class PropagationBase extends ItemNameBlockItem {
                         .withStyle(ChatFormatting.WHITE)));
     }
 
+    @Override
+    public Component getName(ItemStack stack) {
+        GeneticsData genetics = geneticsData(stack);
+
+        return Component.literal(
+                genetics.strainName() + " Seeds"
+        );
+    }
+
     public int getTintColor(ItemStack stack, int tintIndex) {
 
         GeneticsData genetics = geneticsData(stack);
@@ -204,5 +198,11 @@ public class PropagationBase extends ItemNameBlockItem {
 
     private static String formatColor(int color) {
         return String.format("%06X", color & 0xFFFFFF);
+    }
+
+    public ItemStack createSeedStack(GeneticsData genetics) {
+        ItemStack stack = new ItemStack(this);
+        setGeneticsOnSeed(stack, genetics);
+        return stack;
     }
 }

@@ -2,10 +2,16 @@ package com.kaseknife95.contraband.core.base.cropsticks;
 
 import com.kaseknife95.contraband.block.ModBlockEntities;
 import com.kaseknife95.contraband.core.base.breeding.GrowableBreeder;
+import com.kaseknife95.contraband.core.base.drugs.DrugBase;
+import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.base.growables.GrowableBE;
 import com.kaseknife95.contraband.core.base.growables.GrowableBase;
+import com.kaseknife95.contraband.core.base.growables.GrowableDefinition;
 import com.kaseknife95.contraband.core.base.growables.PlantState;
+import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
+import com.kaseknife95.contraband.core.component.ModDataComponents;
+import com.kaseknife95.contraband.core.data.Growables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -14,6 +20,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -128,19 +135,94 @@ public class CropStickBE extends BlockEntity {
         setChangedAndSync();
     }
 
-    /**
-     * Temporary harvest behavior.
-     *
-     * The plant is cleared so the two-stage left-click mechanic can be tested.
-     * Actual seed/raw product drops will be added once the crop-to-item
-     * resolver is connected.
-     */
     public void harvestPlant(Player player) {
         if (!hasPlant()) {
             return;
         }
 
+        if (!isMature()) {
+            return;
+        }
+
+        Level level = getLevel();
+
+        if (level == null || level.isClientSide()) {
+            return;
+        }
+
+        GeneticsData genetics = getGeneticsData();
+
+        if (genetics == null) {
+            clearPlant();
+            return;
+        }
+
+        GrowableDefinition definition =
+                Growables.require(genetics.speciesId());
+
+        dropHybridSeeds(level, definition, genetics);
+        dropRawProduct(level, definition, genetics);
+
         clearPlant();
+    }
+
+    private void dropHybridSeeds(
+            Level level,
+            GrowableDefinition definition,
+            GeneticsData genetics
+    ) {
+        PropagationBase propagation =
+                definition.propagationItem().get();
+
+        ItemStack seedStack = new ItemStack(propagation, 2);
+
+        propagation.setGeneticsOnSeed(
+                seedStack,
+                genetics
+        );
+
+        Block.popResource(
+                level,
+                this.worldPosition,
+                seedStack
+        );
+    }
+
+    private void dropRawProduct(
+            Level level,
+            GrowableDefinition definition,
+            GeneticsData genetics
+    ) {
+        DrugBase rawProduct =
+                definition.rawProduct().get();
+
+        ItemStack productStack =
+                new ItemStack(rawProduct);
+
+        DrugData baseData =
+                rawProduct.baseDrugData();
+
+        DrugData harvestedData =
+                new DrugData(
+                        baseData.drugId(),
+                        baseData.displayName(),
+                        baseData.drugType(),
+                        baseData.basePotency(),
+                        baseData.baseQuality(),
+                        genetics,
+                        baseData.substanceData()
+                );
+
+        productStack.set(
+                ModDataComponents.DRUG_DATA.get(),
+                harvestedData
+        );
+
+        Block.popResource(
+                level,
+                this.worldPosition,
+                productStack
+        );
     }
 
     public static void serverTick(
@@ -293,7 +375,7 @@ public class CropStickBE extends BlockEntity {
         }
 
         if (!parents.isEmpty()
-                && !parents.get(0).speciesId().equals(genetics.speciesId())) {
+                && !parents.getFirst().speciesId().equals(genetics.speciesId())) {
             return;
         }
 
@@ -330,6 +412,7 @@ public class CropStickBE extends BlockEntity {
         tag.putString("mode", mode.name());
         tag.putInt("age", age);
         tag.putInt("breeding_progress", breedingProgress);
+        tag.putInt(TICK_COUNTER_KEY, this.tickCounter);
 
         if (plantState != null) {
             tag.put(
@@ -352,7 +435,7 @@ public class CropStickBE extends BlockEntity {
 
         age = tag.getInt("age");
         breedingProgress = tag.getInt("breeding_progress");
-
+        this.tickCounter = tag.getInt(TICK_COUNTER_KEY);
         if (tag.contains(PLANT_STATE_KEY, Tag.TAG_COMPOUND)) {
             plantState = PlantState.load(
                     tag.getCompound(PLANT_STATE_KEY),
