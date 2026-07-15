@@ -23,7 +23,8 @@ public final class CommonColorRegistry {
 
     public static List<DeferredRegistryObject<Block>> tintableBlocks() {
         return List.of(
-                ModBlocks.CANNABIS_CROP::get
+                ModBlocks.CANNABIS_CROP::get,
+                ModBlocks.CROP_STICKS::get
         );
     }
 }

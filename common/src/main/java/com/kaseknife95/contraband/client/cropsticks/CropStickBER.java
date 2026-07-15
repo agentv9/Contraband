@@ -3,11 +3,14 @@ package com.kaseknife95.contraband.client.cropsticks;
 import com.kaseknife95.contraband.core.base.cropsticks.CropStickBE;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class CropStickBER
@@ -38,6 +41,10 @@ public class CropStickBER
             return;
         }
 
+        if (blockEntity.getLevel() == null) {
+            return;
+        }
+
         BlockState plantState =
                 CropModelRegistry.getPlantState(
                         genetics.speciesId(),
@@ -51,7 +58,7 @@ public class CropStickBER
         poseStack.pushPose();
 
         /*
-         * Tiny offset reduces visual overlap between the crop and sticks.
+         * Slight offset prevents z-fighting with the crop sticks.
          */
         poseStack.translate(
                 0.0D,
@@ -59,19 +66,30 @@ public class CropStickBER
                 0.0D
         );
 
-        this.blockRenderer.renderSingleBlock(
+        VertexConsumer vertexConsumer =
+                bufferSource.getBuffer(RenderType.cutout());
+
+        this.blockRenderer.renderBatched(
                 plantState,
+                blockEntity.getBlockPos(),
+                blockEntity.getLevel(),
                 poseStack,
-                bufferSource,
-                packedLight,
-                packedOverlay
+                vertexConsumer,
+                false,
+                RandomSource.create(
+                        plantState.getSeed(
+                                blockEntity.getBlockPos()
+                        )
+                )
         );
 
         poseStack.popPose();
     }
 
     @Override
-    public boolean shouldRenderOffScreen(CropStickBE blockEntity) {
+    public boolean shouldRenderOffScreen(
+            CropStickBE blockEntity
+    ) {
         return false;
     }
 }

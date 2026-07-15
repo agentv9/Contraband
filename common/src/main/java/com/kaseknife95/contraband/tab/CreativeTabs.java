@@ -29,10 +29,11 @@ public class CreativeTabs {
                                 output.accept(Items.DRIED_HEMP_PACKAGE.get());
                                 output.accept(Items.CANNABIS_LEAF.get());
                                 output.accept(Items.HEMP_PACKAGE.get());
-
                                 output.accept(Items.DRIED_OPIUM.get());
                                 output.accept(Items.OPIUM_BOTTLE.get());
 
+
+                                output.accept(Items.CROP_STICKS.get());
                             })
                             .build()
             );

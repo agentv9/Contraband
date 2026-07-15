@@ -446,6 +446,8 @@ public class CropStickBE extends BlockEntity {
         }
     }
 
+
+
     @Override
     public CompoundTag getUpdateTag(
             HolderLookup.Provider registries

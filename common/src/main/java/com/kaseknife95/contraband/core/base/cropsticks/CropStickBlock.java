@@ -3,6 +3,7 @@ package com.kaseknife95.contraband.core.base.cropsticks;
 import com.kaseknife95.contraband.block.ModBlockEntities;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -10,7 +11,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,10 +29,57 @@ import org.jetbrains.annotations.Nullable;
 public class CropStickBlock extends Block implements EntityBlock {
 
     private static final VoxelShape SHAPE =
-            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
+            Block.box(
+                    2.0D, 0.0D, 2.0D,
+                    14.0D, 15.0D, 14.0D
+            );
 
     public CropStickBlock(BlockBehaviour.Properties properties) {
         super(properties);
+    }
+
+    /**
+     * Crop sticks may only exist directly above farmland.
+     *
+     * This is also checked by BlockItem before the block is placed,
+     * preventing placement on dirt, grass, stone, and other blocks.
+     */
+    @Override
+    public boolean canSurvive(
+            BlockState state,
+            LevelReader level,
+            BlockPos pos
+    ) {
+        BlockState groundState = level.getBlockState(pos.below());
+
+        return groundState.is(Blocks.FARMLAND);
+    }
+
+    /**
+     * Break the crop sticks when the supporting farmland is removed
+     * or changes into another block.
+     */
+    @Override
+    protected BlockState updateShape(
+            BlockState state,
+            Direction direction,
+            BlockState neighborState,
+            LevelAccessor level,
+            BlockPos pos,
+            BlockPos neighborPos
+    ) {
+        if (direction == Direction.DOWN && !state.canSurvive(level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+
+        return super.updateShape(
+                state,
+                direction,
+                neighborState,
+                level,
+                pos,
+                neighborPos
+        );
     }
 
     @Override
@@ -110,10 +161,10 @@ public class CropStickBlock extends Block implements EntityBlock {
     }
 
     /**
-     * Called by your loader-specific block-break event.
+     * Called by the loader-specific block-break event.
      *
-     * @return true when a plant was harvested and block destruction
-     * should be cancelled.
+     * @return true when a plant was harvested and normal block
+     * destruction should be cancelled.
      */
     public boolean harvestPlant(
             Level level,

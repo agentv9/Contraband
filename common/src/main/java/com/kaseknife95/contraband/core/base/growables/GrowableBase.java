@@ -1,5 +1,6 @@
 package com.kaseknife95.contraband.core.base.growables;
 
+import com.kaseknife95.contraband.core.base.cropsticks.CropStickBE;
 import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
@@ -98,11 +99,15 @@ public class GrowableBase extends CropBlock implements EntityBlock {
 
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
-        if (!(blockEntity instanceof GrowableBE growableBE)) {
+        GeneticsData genetics;
+
+        if (blockEntity instanceof GrowableBE growableBE) {
+            genetics = growableBE.getGeneticsData();
+        } else if (blockEntity instanceof CropStickBE cropStickBE) {
+            genetics = cropStickBE.getGeneticsData();
+        } else {
             return 0xFFFFFF;
         }
-
-        GeneticsData genetics = growableBE.getGeneticsData();
 
         if (genetics == null) {
             return 0xFFFFFF;
