@@ -95,6 +95,10 @@ public abstract class DrugBase extends Item {
             return Component.literal(data.substanceData().strainName());
         }
 
+        if (data.geneticsData() != null && data.geneticsData().strainName() != null && !data.geneticsData().strainName().isBlank()) {
+            return Component.literal(data.geneticsData().strainName());
+        }
+
         if (data.displayName() != null && !data.displayName().isBlank()) {
             return Component.literal(data.displayName());
         }

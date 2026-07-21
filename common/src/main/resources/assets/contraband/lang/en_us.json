@@ -1,6 +1,10 @@
 {
+
   "item.contraband.psilocybin_mushroom": "Psilocybin Mushroom",
   "item.contraband.cannabis_seed": "Cannabis Seed",
-  "itemGroup.contraband.contraband": "Contraband",
-  "itemGroup.contraband.contraband_seeds": "Contraband - Seeds"
+
+  "block.contraband.crop_sticks": "Crop Sticks",
+
+  "itemGroup.contraband.contraband": "Contraband - Extras",
+  "itemGroup.contraband.contraband_growables": "Contraband - Seeds / Products"
 }

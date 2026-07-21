@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "contraband:item/blunt/blunt_base",
+    "layer1": "contraband:item/blunt/blunt_primary",
+    "layer2": "contraband:item/blunt/blunt_secondary"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [0, 90, -35],
+      "translation": [0, 1.5, -2.5],
+      "scale": [0.55, 0.55, 0.55]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, -90, 35],
+      "translation": [0, 1.5, -2.5],
+      "scale": [0.55, 0.55, 0.55]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, -135, 25],
+      "translation": [0, 4, 2],
+      "scale": [1.4, 1.4, 1.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 135, -25],
+      "translation": [0, 4, 2],
+      "scale": [1.4, 1.4, 1.4]
+    },
+    "gui": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 2, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "fixed": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }
+  }
+}

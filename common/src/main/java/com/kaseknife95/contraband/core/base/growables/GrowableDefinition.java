@@ -10,13 +10,15 @@ public record GrowableDefinition(
         GrowableData data,
         Supplier<? extends GrowableBase> crop,
         Supplier<? extends PropagationBase> propagationItem,
-        Supplier<? extends DrugBase> rawProduct
+        Supplier<? extends DrugBase> rawProduct,
+        Supplier<? extends DrugBase> rawProduct2
 ) {
     public GrowableDefinition {
         Objects.requireNonNull(data, "data cannot be null");
         Objects.requireNonNull(crop, "crop cannot be null");
         Objects.requireNonNull(propagationItem, "propagationItem cannot be null");
         Objects.requireNonNull(rawProduct, "rawProduct cannot be null");
+        Objects.requireNonNull(rawProduct2, "rawProduct cannot be null");
     }
 
     public String speciesId() {

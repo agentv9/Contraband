@@ -196,8 +196,13 @@ public class CropStickBE extends BlockEntity {
         DrugBase rawProduct =
                 definition.rawProduct().get();
 
+        DrugBase rawProduct2 = definition.rawProduct2().get();
+
         ItemStack productStack =
                 new ItemStack(rawProduct);
+
+        ItemStack productStack2 =
+                new ItemStack(rawProduct2);
 
         DrugData baseData =
                 rawProduct.baseDrugData();
@@ -222,6 +227,17 @@ public class CropStickBE extends BlockEntity {
                 level,
                 this.worldPosition,
                 productStack
+        );
+
+        productStack2.set(
+                ModDataComponents.DRUG_DATA.get(),
+                harvestedData
+        );
+
+        Block.popResource(
+                level,
+                this.worldPosition,
+                productStack2
         );
     }
 

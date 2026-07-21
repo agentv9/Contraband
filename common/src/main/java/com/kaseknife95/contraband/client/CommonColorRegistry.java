@@ -7,17 +7,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public final class CommonColorRegistry {
 
     private CommonColorRegistry() {}
 
-    public static List<Supplier<Item>> tintableItems() {
+    public static List<DeferredRegistryObject<Item>> tintableItems() {
         return List.of(
-                Items.SHROOM::get,
                 Items.CANNABIS_SEED::get,
-                Items.CANNABIS_LEAF::get
+                Items.CANNABIS_LEAF::get,
+                Items.CANNABIS_BUD::get,
+                Items.BLUNT::get
         );
     }
 

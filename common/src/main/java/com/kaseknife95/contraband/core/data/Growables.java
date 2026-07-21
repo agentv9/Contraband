@@ -37,7 +37,8 @@ public final class Growables {
                     CANNABIS_DATA,
                     () -> (GrowableBase) ModBlocks.CANNABIS_CROP.get(),
                     () -> (PropagationBase) Items.CANNABIS_SEED.get(),
-                    () -> (DrugBase) Items.CANNABIS_LEAF.get()
+                    () -> (DrugBase) Items.CANNABIS_LEAF.get(),
+                    () -> (DrugBase) Items.CANNABIS_BUD.get()
             );
 
     private static final Map<String, GrowableDefinition> DEFINITIONS =

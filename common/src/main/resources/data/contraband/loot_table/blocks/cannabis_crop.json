@@ -23,9 +23,38 @@
       ],
       "rolls": 1,
       "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "contraband:cannabis_leaf",
+        "functions": [
+          {
+            "function": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 1.0,
+              "max": 3.0
+            },
+            "add": false
+          }
+        ]
+      }
+    ],
+      "rolls": 2,
+      "entries": [
         {
           "type": "minecraft:item",
-          "name": "contraband:cannabis_leaf"
+          "name": "contraband:cannabis_bud",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              },
+              "add": false
+            }
+          ]
         }
       ]
     }

@@ -1,6 +1,7 @@
 package com.kaseknife95.contraband.item;
 
 import com.kaseknife95.contraband.block.ModBlocks;
+import com.kaseknife95.contraband.core.base.drugs.DrugBase;
 import com.kaseknife95.contraband.core.base.drugs.DrugData;
 import com.kaseknife95.contraband.core.base.drugs.DrugType;
 import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
@@ -8,10 +9,8 @@ import com.kaseknife95.contraband.core.base.products.RawProductBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.item.drugs.Shroom;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
@@ -45,10 +44,10 @@ public class Items {
     public static final DeferredRegistryObject<Item> DRIED_COCAINE_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cocaine_package",
                     () -> new Item(new Item.Properties()));
-    public static final DeferredRegistryObject<Item> DRIED_HEMP =
+    public static final DeferredRegistryObject<Item> DRIED_CANNABIS =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis",
                     () -> new Item(new Item.Properties()));
-    public static final DeferredRegistryObject<Item> DRIED_HEMP_PACKAGE =
+    public static final DeferredRegistryObject<Item> DRIED_CANNABIS_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis_package",
                     () -> new Item(new Item.Properties()));
 
@@ -64,6 +63,22 @@ public class Items {
                     () -> new Item(new Item.Properties()));
     //Drugs
 
+    public static final DeferredRegistryObject<Item> BLUNT =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "blunt",
+                    () -> new DrugBase(new Item.Properties(), new DrugData(
+                            "cannabis",
+                            "Joint",
+                            DrugType.CANNABINOID,
+                            1.0F,
+                            1.0F,
+                            GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32),
+                            SubstanceData.defaultVariant("cannabis", 0x6B3FA0, 0x2E7D32)
+                    )) {
+
+                    });
+
+
+
     public static final DeferredRegistryObject<Item> CANNABIS_LEAF =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_leaf",
                     () -> new RawProductBase(new Item.Properties(), new DrugData(
@@ -73,22 +88,22 @@ public class Items {
                             1.0F,
                             1.0F,
                             GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32),
-                            SubstanceData.defaultVariant("OG Kush", 0x6B3FA0, 0x2E7D32)
+                            SubstanceData.defaultVariant("cannabis", 0x6B3FA0, 0x2E7D32)
+                    )));
+
+    public static final DeferredRegistryObject<Item> CANNABIS_BUD =
+            Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_bud",
+                    () -> new RawProductBase(new Item.Properties(), new DrugData(
+                            "cannabis",
+                            "Cannabis Bud",
+                            DrugType.CANNABINOID,
+                            1.0F,
+                            1.0F,
+                            GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32),
+                            SubstanceData.defaultVariant("cannabis", 0x6B3FA0, 0x2E7D32)
                     )));
 
 
-
-    public static final DeferredRegistryObject<Item> SHROOM =
-            Services.PLATFORM.register(BuiltInRegistries.ITEM, "shroom",
-                    () -> new Shroom(
-                            new Item.Properties()
-                                    .food(new FoodProperties.Builder()
-                                            .nutrition(2)
-                                            .saturationModifier(0.2f)
-                                            .alwaysEdible()
-                                            .build()
-                                    ), "Golden Teacher"
-                    ));
 
     public static final DeferredRegistryObject<Item> CANNABIS_SEED =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_seed",
