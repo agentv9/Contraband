@@ -18,6 +18,6 @@ public final class ClientRenderRefresh {
     }
 
     public interface Handler {
-        void refresh(BlockPos pos);
+        void refresh(BlockPos pos);//random comment so theres a chance to commit fot test
     }
 }
