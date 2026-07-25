@@ -6,7 +6,7 @@ import com.kaseknife95.contraband.core.base.genetics.GeneticsData;
 import com.kaseknife95.contraband.core.component.ModDataComponents;
 import com.kaseknife95.contraband.core.data.CannabisStrains;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.item.Items;
+import com.kaseknife95.contraband.item.ModItems;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -18,22 +18,22 @@ public class CreativeTabs {
             Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "contraband",
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("itemGroup.contraband.contraband"))
-                            .icon(() -> new ItemStack(Items.LOGO_ITEM.get()))
+                            .icon(() -> new ItemStack(ModItems.LOGO_ITEM.get()))
                             .displayItems((parameters, output) -> {
-                                output.accept(Items.COCAINE_LEAF.get());
-                                output.accept(Items.COCAINE_SEED.get());
-                                output.accept(Items.DRIED_COCAINE.get());
-                                output.accept(Items.DRIED_COCAINE_PACKAGE.get());
-                                output.accept(Items.DRIED_CANNABIS.get());
-                                output.accept(Items.DRIED_CANNABIS_PACKAGE.get());
+                                output.accept(ModItems.COCAINE_LEAF.get());
+                                output.accept(ModItems.COCAINE_SEED.get());
+                                output.accept(ModItems.DRIED_COCAINE.get());
+                                output.accept(ModItems.DRIED_COCAINE_PACKAGE.get());
+                                output.accept(ModItems.DRIED_CANNABIS.get());
+                                output.accept(ModItems.DRIED_CANNABIS_PACKAGE.get());
 
 
-                                output.accept(Items.HEMP_PACKAGE.get());
-                                output.accept(Items.DRIED_OPIUM.get());
-                                output.accept(Items.OPIUM_BOTTLE.get());
+                                output.accept(ModItems.HEMP_PACKAGE.get());
+                                output.accept(ModItems.DRIED_OPIUM.get());
+                                output.accept(ModItems.OPIUM_BOTTLE.get());
 
 
-                                output.accept(Items.CROP_STICKS.get());
+                                output.accept(ModItems.CROP_STICKS.get());
                             })
                             .build()
             );
@@ -42,12 +42,12 @@ public class CreativeTabs {
             Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "contraband_growables",
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("itemGroup.contraband.contraband_growables"))
-                            .icon(() -> new ItemStack(Items.CANNABIS_SEED.get()))
+                            .icon(() -> new ItemStack(ModItems.CANNABIS_SEED.get()))
                             .displayItems((parameters, output) -> {
 
                                 for (GeneticsData genetics : CannabisStrains.createAll()) {
                                     ItemStack seedStack =
-                                            new ItemStack(Items.CANNABIS_SEED.get());
+                                            new ItemStack(ModItems.CANNABIS_SEED.get());
 
                                     seedStack.set(
                                             ModDataComponents.GENETICS.get(),
@@ -55,13 +55,13 @@ public class CreativeTabs {
                                     );
 
                                     DrugBase budItem =
-                                            (DrugBase) Items.CANNABIS_BUD.get();
+                                            (DrugBase) ModItems.CANNABIS_BUD.get();
 
                                     DrugBase leafItem =
-                                            (DrugBase) Items.CANNABIS_LEAF.get();
+                                            (DrugBase) ModItems.CANNABIS_LEAF.get();
 
                                     DrugBase jointItem =
-                                            (DrugBase) Items.BLUNT.get();
+                                            (DrugBase) ModItems.BLUNT.get();
 
                                     ItemStack budStack =
                                             createDrugStackFromGenetics(budItem, genetics);

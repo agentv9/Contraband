@@ -8,6 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,6 +34,9 @@ public class NeoForgeRegistryHelper {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPE  =
             DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Constants.MOD_ID);
 
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS  =
+            DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, Constants.MOD_ID);
+
     @SuppressWarnings("unchecked")
     public static <T> DeferredRegister<T> deferredRegisterFor(Registry<T> objRegistry) {
         if (objRegistry.key().location().equals(BuiltInRegistries.ITEM.key().location())) {
@@ -54,6 +58,9 @@ public class NeoForgeRegistryHelper {
         }
         if (objRegistry.key().location().equals(BuiltInRegistries.DATA_COMPONENT_TYPE.key().location())) {
             return (DeferredRegister<T>) DATA_COMPONENT_TYPE;
+        }
+        if (objRegistry.key().location().equals(BuiltInRegistries.RECIPE_SERIALIZER.key().location())) {
+            return (DeferredRegister<T>) RECIPE_SERIALIZERS;
         }
         throw new IllegalArgumentException("No NeoForge registry linked for: " + objRegistry.key());
     }

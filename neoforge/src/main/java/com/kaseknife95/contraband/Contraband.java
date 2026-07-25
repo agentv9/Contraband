@@ -20,6 +20,7 @@ public class Contraband {
         NeoForgeRegistryHelper.BLOCK_ENTITY_TYPE.register(eventBus);
         NeoForgeRegistryHelper.DATA_COMPONENT_TYPE.register(eventBus);
         NeoForgeRegistryHelper.CREATIVE_TABS.register(eventBus);
+        NeoForgeRegistryHelper.RECIPE_SERIALIZERS.register(eventBus);
 
         Constants.LOG.info("Hello NeoForge world!");
         CommonClass.init();

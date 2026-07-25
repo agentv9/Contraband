@@ -2,10 +2,11 @@ package com.kaseknife95.contraband;
 
 import com.kaseknife95.contraband.block.ModBlockEntities;
 import com.kaseknife95.contraband.block.ModBlocks;
+import com.kaseknife95.contraband.core.base.recipes.ModRecipeSerializers;
+import com.kaseknife95.contraband.item.ModItems;
 import com.kaseknife95.contraband.tab.CreativeTabs;
-import com.kaseknife95.contraband.effect.Effects;
+import com.kaseknife95.contraband.effect.ModEffects;
 import com.kaseknife95.contraband.core.component.ModDataComponents;
-import com.kaseknife95.contraband.item.Items;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -22,12 +23,13 @@ public class CommonClass {
         Constants.LOG.info("Hello from Common init on {}! we are currently in a {} environment!", Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
         Constants.LOG.info("The ID for diamonds is {}", BuiltInRegistries.ITEM.getKey(net.minecraft.world.item.Items.DIAMOND));
 
-        Effects.loadClass();
-        Items.loadClass();
+        ModEffects.loadClass();
+        ModItems.loadClass();
         ModBlocks.loadClass();
         ModBlockEntities.loadClass();
         CreativeTabs.loadClass();
         ModDataComponents.loadClass();
+        ModRecipeSerializers.loadClass();
         // It is common for all supported loaders to provide a similar feature that can not be used directly in the
         // common code. A popular way to get around this is using Java's built-in service loader feature to create
         // your own abstraction layer. You can learn more about this in our provided services class. In this example

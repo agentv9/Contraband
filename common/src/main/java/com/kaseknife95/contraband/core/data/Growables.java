@@ -7,7 +7,7 @@ import com.kaseknife95.contraband.core.base.growables.GrowableBase;
 import com.kaseknife95.contraband.core.base.growables.GrowableData;
 import com.kaseknife95.contraband.core.base.growables.GrowableDefinition;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
-import com.kaseknife95.contraband.item.Items;
+import com.kaseknife95.contraband.item.ModItems;
 
 
 import java.util.Map;
@@ -36,9 +36,9 @@ public final class Growables {
             new GrowableDefinition(
                     CANNABIS_DATA,
                     () -> (GrowableBase) ModBlocks.CANNABIS_CROP.get(),
-                    () -> (PropagationBase) Items.CANNABIS_SEED.get(),
-                    () -> (DrugBase) Items.CANNABIS_LEAF.get(),
-                    () -> (DrugBase) Items.CANNABIS_BUD.get()
+                    () -> (PropagationBase) ModItems.CANNABIS_SEED.get(),
+                    () -> (DrugBase) ModItems.CANNABIS_LEAF.get(),
+                    () -> (DrugBase) ModItems.CANNABIS_BUD.get()
             );
 
     private static final Map<String, GrowableDefinition> DEFINITIONS =

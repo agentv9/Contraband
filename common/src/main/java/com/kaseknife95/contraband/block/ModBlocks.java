@@ -4,7 +4,7 @@ import com.kaseknife95.contraband.core.base.cropsticks.CropStickBlock;
 import com.kaseknife95.contraband.core.base.growables.GrowableBase;
 import com.kaseknife95.contraband.core.data.Growables;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
-import com.kaseknife95.contraband.item.Items;
+import com.kaseknife95.contraband.item.ModItems;
 import com.kaseknife95.contraband.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -23,7 +23,7 @@ public class ModBlocks {
                                     net.minecraft.world.level.block.Blocks.WHEAT
                             ),
                             Growables.CANNABIS_DATA,
-                            () -> Items.CANNABIS_SEED.get()
+                            () -> ModItems.CANNABIS_SEED.get()
                     )
             );
     public static final DeferredRegistryObject<Block> CROP_STICKS =

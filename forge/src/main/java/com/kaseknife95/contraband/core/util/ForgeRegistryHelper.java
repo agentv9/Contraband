@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,6 +33,10 @@ public class ForgeRegistryHelper {
 
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS =
             DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, Constants.MOD_ID);
+
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(Registries.RECIPE_SERIALIZER, Constants.MOD_ID);
+
     @SuppressWarnings("unchecked")
     public static <T> DeferredRegister<T> deferredRegisterFor(Registry<T> objRegistry) {
 
@@ -56,6 +61,9 @@ public class ForgeRegistryHelper {
 
         if (objRegistry.key().location().equals(Registries.DATA_COMPONENT_TYPE.location())) {
             return (DeferredRegister<T>) DATA_COMPONENTS;
+        }
+        if (objRegistry.key().location().equals(Registries.RECIPE_SERIALIZER.location())) {
+            return (DeferredRegister<T>) RECIPE_SERIALIZERS;
         }
         throw new IllegalArgumentException(
                 "No registry linked in Forge module to register type: " + objRegistry.key()

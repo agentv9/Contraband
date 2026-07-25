@@ -9,12 +9,15 @@ import com.kaseknife95.contraband.core.base.products.RawProductBase;
 import com.kaseknife95.contraband.core.base.propagation.PropagationBase;
 import com.kaseknife95.contraband.core.base.substances.SubstanceData;
 import com.kaseknife95.contraband.core.util.DeferredRegistryObject;
+import com.kaseknife95.contraband.item.drugs.Blunt;
 import com.kaseknife95.contraband.platform.Services;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
-public class Items {
+public class ModItems {
 
     public static final DeferredRegistryObject<Item> LOGO_ITEM =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "logo_item",
@@ -31,7 +34,7 @@ public class Items {
                     )
             );
 
-    //Growing stuff
+   //Junk
     public static final DeferredRegistryObject<Item> COCAINE_LEAF =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cocaine_leaf",
                     () -> new Item(new Item.Properties()));
@@ -50,7 +53,6 @@ public class Items {
     public static final DeferredRegistryObject<Item> DRIED_CANNABIS_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "dried_cannabis_package",
                     () -> new Item(new Item.Properties()));
-
     public static final DeferredRegistryObject<Item> HEMP_PACKAGE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_package",
                     () -> new Item(new Item.Properties()));
@@ -61,11 +63,13 @@ public class Items {
     public static final DeferredRegistryObject<Item> OPIUM_BOTTLE =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "opium_bottle",
                     () -> new Item(new Item.Properties()));
-    //Drugs
+
+
+    //Cannabis
 
     public static final DeferredRegistryObject<Item> BLUNT =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "blunt",
-                    () -> new DrugBase(new Item.Properties(), new DrugData(
+                    () -> new Blunt(new Item.Properties().component(DataComponents.FOOD, new FoodProperties.Builder().nutrition(0).saturationModifier(0).alwaysEdible().build()), new DrugData(
                             "cannabis",
                             "Joint",
                             DrugType.CANNABINOID,
@@ -73,11 +77,7 @@ public class Items {
                             1.0F,
                             GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32),
                             SubstanceData.defaultVariant("cannabis", 0x6B3FA0, 0x2E7D32)
-                    )) {
-
-                    });
-
-
+                    )));
 
     public static final DeferredRegistryObject<Item> CANNABIS_LEAF =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_leaf",
@@ -103,8 +103,6 @@ public class Items {
                             SubstanceData.defaultVariant("cannabis", 0x6B3FA0, 0x2E7D32)
                     )));
 
-
-
     public static final DeferredRegistryObject<Item> CANNABIS_SEED =
             Services.PLATFORM.register(BuiltInRegistries.ITEM, "cannabis_seed",
                     () -> new PropagationBase(
@@ -112,5 +110,7 @@ public class Items {
                             new Item.Properties(),
                             GeneticsData.defaultGenetics("cannabis", 0x6B3FA0, 0x2E7D32)
                     ));
+
+
     public static void loadClass() {}
 }

@@ -24,6 +24,7 @@ public class Contraband {
         ForgeRegistryHelper.DATA_COMPONENTS.register(modEventBus);
         ForgeRegistryHelper.ITEMS.register(modEventBus);
         ForgeRegistryHelper.CREATIVE_TABS.register(modEventBus);
+        ForgeRegistryHelper.RECIPE_SERIALIZERS.register(modEventBus);
 
     }
 }
