@@ -13,7 +13,7 @@ public final class ClientRenderRefresh {
 
     public static void refresh(BlockPos pos) {
         if (handler != null) {
-            handler.refresh(pos);
+            handler.refresh(pos);//test change for commit
         }
     }
 
