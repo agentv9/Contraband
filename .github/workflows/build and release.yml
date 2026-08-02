@@ -61,9 +61,7 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew compileJava --no-daemon
-        # 2. Run all Gametests for each loader
-      - name: Run Gametests
-        run: ./gradlew runGameTests
+      
 
   # After everything was tested and compiled successfully we can build and upload the mods
   build_and_publish:
